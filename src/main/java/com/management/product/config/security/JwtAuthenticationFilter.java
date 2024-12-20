@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
-
     private final  UserDetailsService userDetailsService;
 
 

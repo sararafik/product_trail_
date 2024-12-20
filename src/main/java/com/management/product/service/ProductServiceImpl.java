@@ -2,13 +2,16 @@ package com.management.product.service;
 
 import com.management.product.dtos.ProductDto;
 import com.management.product.entities.Product;
+import com.management.product.enums.InventoryStatus;
 import com.management.product.mapper.ProductMapper;
+import com.management.product.repository.ProductCriteriaRepository;
 import com.management.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -81,10 +84,18 @@ public class ProductServiceImpl implements  ProductService{
     }
 
     @Override
-    public Page<ProductDto> getProducts(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return  productMapper.toDtoPage(productRepository.findAll(pageable));
+    public Page<ProductDto> getProducts(String nameProduct,int page, int size, InventoryStatus inventoryStatus, boolean sortDesc) {
+        Sort sort = sortDesc ? Sort.by("createdAt").descending() : Sort.by("createdAt").ascending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return productMapper.toDtoPage(productRepository.findAll(
+                ProductCriteriaRepository.filterByCriteria(nameProduct, inventoryStatus),
+                pageable
+        ));
     }
+
+
+
 
 
 }

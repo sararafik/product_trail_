@@ -1,6 +1,5 @@
 package com.management.product.dtos;
 
-import com.management.product.entities.UserInfo;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

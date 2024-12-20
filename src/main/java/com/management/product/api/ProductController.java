@@ -1,6 +1,7 @@
 package com.management.product.api;
 
 import com.management.product.dtos.ProductDto;
+import com.management.product.enums.InventoryStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,6 @@ public interface ProductController {
     String URI_ID_PRODUCT = "/{idProduct}";
     String URI_CART_USER = "/cart-user";
     String URI_WISH_LIST = "/wish-list";
-    String URI_PAGE = "/pagination";
 
     @PostMapping()
     ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto productDto);
@@ -27,9 +27,12 @@ public interface ProductController {
     ResponseEntity<List<ProductDto>> getProductsOfCartUser();
     @GetMapping(value = URI_WISH_LIST)
     ResponseEntity<List<ProductDto>> getProductsOfWishlistUser();
-
     @GetMapping()
     Page<ProductDto> getProducts(
+            @RequestParam(required = false) String nameProduct,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) ;
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(name = "inventory", required = false) InventoryStatus inventoryStatus,
+            @RequestParam(name = "sortDesc", defaultValue = "true") boolean sortDesc) ;
+
 }

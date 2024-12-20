@@ -1,6 +1,7 @@
 package com.management.product.api;
 
 import com.management.product.dtos.ProductDto;
+import com.management.product.enums.InventoryStatus;
 import com.management.product.service.CartService;
 import com.management.product.service.ProductService;
 import com.management.product.service.WishlistService;
@@ -24,8 +25,6 @@ public class ProductControllerImpl implements ProductController {
     public static final String UNAUTHORIZED_ACCESS = "Unauthorized Access";
     public static final String THE_USER_IS_NOT_AUTHORIZED = "The user is not authorized.";
     public static final String THE_PRODUCT_NOT_FOUNDED = "The product with id %s not founded.";
-    public static final String ERROR_PRODUCTS = "error in getting products";
-    public static final String ERROR__FETCHING_PRODUCTS = "Error occurred while fetching products ";
     private final ProductService productService;
     private final CartService cartService;
     private final WishlistService wishlistService;
@@ -95,7 +94,8 @@ public class ProductControllerImpl implements ProductController {
     }
 
     @Override
-    public Page<ProductDto> getProducts(int page, int size) {
-        return productService.getProducts(page, size);
+    public Page<ProductDto> getProducts(String nameProduct, int page, int size, InventoryStatus inventoryStatus, boolean sortDesc) {
+        return productService.getProducts(nameProduct,page, size,inventoryStatus,sortDesc);
     }
+
 }

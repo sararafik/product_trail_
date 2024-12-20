@@ -10,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDto {
+    private Long idProduct;
     private String   codeProduct;
     private String   nameProduct;
     private String   descriptionProduct;

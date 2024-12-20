@@ -10,6 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
+     @Mapping(source = "idProduct", target = "idProduct")
      @Mapping(source = "codeProduct", target = "codeProduct")
      @Mapping(source = "nameProduct", target = "nameProduct")
      @Mapping(source = "descriptionProduct", target = "descriptionProduct")
@@ -22,6 +23,7 @@ public interface ProductMapper {
      @Mapping(source = "inventoryStatus", target = "inventoryStatus")
      @Mapping(source = "ratingProduct", target = "ratingProduct")
      ProductDto fromEntity(Product product);
+     @Mapping(source = "idProduct", target = "idProduct")
      @Mapping(source = "codeProduct", target = "codeProduct")
      @Mapping(source = "nameProduct", target = "nameProduct")
      @Mapping(source = "descriptionProduct", target = "descriptionProduct")
